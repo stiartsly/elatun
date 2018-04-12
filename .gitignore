@@ -1,0 +1,17 @@
+*.o
+*.lo
+*.a
+*.so
+*.swp
+*.patch
+*.dylib
+.DS_Store
+xcuserdata
+*.pbxuser
+*.xcuserstate
+DerivedData
+tags
+/build
+/external/libs
+/src/cmd_generated.h
+/external/include/flatcc

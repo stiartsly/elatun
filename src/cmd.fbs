@@ -1,0 +1,66 @@
+namespace cmd;
+  
+table bind_service {
+    tid    : long;
+    userid : string;
+    service: string;
+    bind_address : string;
+    port   : string;
+}
+
+table unbind_service {
+    tid    : long;
+    userid : string;
+    service: string;
+}
+
+table list_services {
+    tid    : long;
+    userid : string;
+    service: string;
+}
+
+table open_service {
+    tid    : long;
+    userid : string;
+    user_address: string;
+    service: string;
+    bind_address: string;
+    port   : string;
+}
+
+table close_service{
+    tid    : long;
+    userid : string;
+    service: string;
+}
+
+table ps_services {
+    tid    : long;
+    userid : string;
+    service: string;
+}
+
+table result {
+    tid    : long;
+    status : int;
+}
+
+union anybody {
+    bind_service,
+    unbind_service,
+    list_services,
+    open_service,
+    close_service,
+    ps_services,
+    result,
+}
+
+table packet 
+{
+    type   : uint8;
+    body   : anybody;
+}
+
+root_type packet;
+

@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A31B60D1207C612A0066029F /* libflatcc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31B60CB207C612A0066029F /* libflatcc.a */; };
+		A31B60D2207C612A0066029F /* libelasession.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A31B60CC207C612A0066029F /* libelasession.dylib */; };
+		A31B60D3207C612A0066029F /* libflatccrt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31B60CD207C612A0066029F /* libflatccrt.a */; };
+		A31B60D4207C612A0066029F /* libconfuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31B60CE207C612A0066029F /* libconfuse.a */; };
+		A31B60D5207C612A0066029F /* libelacarrier.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A31B60CF207C612A0066029F /* libelacarrier.dylib */; };
+		A31B60D6207C612A0066029F /* libelacommon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A31B60D0207C612A0066029F /* libelacommon.dylib */; };
+		A3268284206FC7A200492082 /* config.c in Sources */ = {isa = PBXBuildFile; fileRef = A326827E206FC7A100492082 /* config.c */; };
+		A3268285206FC7A200492082 /* socket.c in Sources */ = {isa = PBXBuildFile; fileRef = A326827F206FC7A100492082 /* socket.c */; };
+		A3268286206FC7A200492082 /* tunnel.c in Sources */ = {isa = PBXBuildFile; fileRef = A3268280206FC7A100492082 /* tunnel.c */; };
+		A3268287206FC7A200492082 /* packet.c in Sources */ = {isa = PBXBuildFile; fileRef = A3268281206FC7A100492082 /* packet.c */; };
+		A3268288206FC7A200492082 /* cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = A3268282206FC7A200492082 /* cmd.c */; };
+		A3268289206FC7A200492082 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = A3268283206FC7A200492082 /* main.c */; };
+		A3268291206FC7C300492082 /* bind.c in Sources */ = {isa = PBXBuildFile; fileRef = A326828A206FC7C300492082 /* bind.c */; };
+		A3268292206FC7C300492082 /* ps.c in Sources */ = {isa = PBXBuildFile; fileRef = A326828B206FC7C300492082 /* ps.c */; };
+		A3268293206FC7C300492082 /* unbind.c in Sources */ = {isa = PBXBuildFile; fileRef = A326828C206FC7C300492082 /* unbind.c */; };
+		A3268294206FC7C300492082 /* services.c in Sources */ = {isa = PBXBuildFile; fileRef = A326828D206FC7C300492082 /* services.c */; };
+		A3268295206FC7C300492082 /* open.c in Sources */ = {isa = PBXBuildFile; fileRef = A326828E206FC7C300492082 /* open.c */; };
+		A3268296206FC7C300492082 /* close.c in Sources */ = {isa = PBXBuildFile; fileRef = A326828F206FC7C300492082 /* close.c */; };
+		A3268297206FC7C300492082 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = A3268290206FC7C300492082 /* info.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A3268270206FC75700492082 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A31B60C9207B68490066029F /* cmd_generated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmd_generated.h; path = ../../../src/cmd_generated.h; sourceTree = "<group>"; };
+		A31B60CB207C612A0066029F /* libflatcc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libflatcc.a; path = ../../deps/libs/libflatcc.a; sourceTree = "<group>"; };
+		A31B60CC207C612A0066029F /* libelasession.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libelasession.dylib; path = ../../deps/libs/libelasession.dylib; sourceTree = "<group>"; };
+		A31B60CD207C612A0066029F /* libflatccrt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libflatccrt.a; path = ../../deps/libs/libflatccrt.a; sourceTree = "<group>"; };
+		A31B60CE207C612A0066029F /* libconfuse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libconfuse.a; path = ../../deps/libs/libconfuse.a; sourceTree = "<group>"; };
+		A31B60CF207C612A0066029F /* libelacarrier.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libelacarrier.dylib; path = ../../deps/libs/libelacarrier.dylib; sourceTree = "<group>"; };
+		A31B60D0207C612A0066029F /* libelacommon.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libelacommon.dylib; path = ../../deps/libs/libelacommon.dylib; sourceTree = "<group>"; };
+		A3268272206FC75700492082 /* tunnel */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tunnel; sourceTree = BUILT_PRODUCTS_DIR; };
+		A326827E206FC7A100492082 /* config.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = config.c; path = ../../../src/config.c; sourceTree = "<group>"; };
+		A326827F206FC7A100492082 /* socket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = socket.c; path = ../../../src/socket.c; sourceTree = "<group>"; };
+		A3268280206FC7A100492082 /* tunnel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tunnel.c; path = ../../../src/tunnel.c; sourceTree = "<group>"; };
+		A3268281206FC7A100492082 /* packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = packet.c; path = ../../../src/packet.c; sourceTree = "<group>"; };
+		A3268282206FC7A200492082 /* cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cmd.c; path = ../../../src/cmd.c; sourceTree = "<group>"; };
+		A3268283206FC7A200492082 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../../../src/main.c; sourceTree = "<group>"; };
+		A326828A206FC7C300492082 /* bind.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bind.c; path = ../../../src/cmd/bind.c; sourceTree = "<group>"; };
+		A326828B206FC7C300492082 /* ps.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ps.c; path = ../../../src/cmd/ps.c; sourceTree = "<group>"; };
+		A326828C206FC7C300492082 /* unbind.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unbind.c; path = ../../../src/cmd/unbind.c; sourceTree = "<group>"; };
+		A326828D206FC7C300492082 /* services.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = services.c; path = ../../../src/cmd/services.c; sourceTree = "<group>"; };
+		A326828E206FC7C300492082 /* open.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = open.c; path = ../../../src/cmd/open.c; sourceTree = "<group>"; };
+		A326828F206FC7C300492082 /* close.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = close.c; path = ../../../src/cmd/close.c; sourceTree = "<group>"; };
+		A3268290206FC7C300492082 /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = info.c; path = ../../../src/cmd/info.c; sourceTree = "<group>"; };
+		A3268298206FC7D300492082 /* status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = status.h; path = ../../../src/status.h; sourceTree = "<group>"; };
+		A3268299206FC7D300492082 /* tunnel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tunnel.h; path = ../../../src/tunnel.h; sourceTree = "<group>"; };
+		A326829A206FC7D300492082 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = socket.h; path = ../../../src/socket.h; sourceTree = "<group>"; };
+		A326829B206FC7D400492082 /* cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmd.h; path = ../../../src/cmd.h; sourceTree = "<group>"; };
+		A326829C206FC7D400492082 /* packet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = packet.h; path = ../../../src/packet.h; sourceTree = "<group>"; };
+		A326829D206FC7D400492082 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../../../src/config.h; sourceTree = "<group>"; };
+		A326829E207305A500492082 /* agents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = agents.h; path = ../../../src/agents.h; sourceTree = "<group>"; };
+		A326829F2073391300492082 /* shadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shadows.h; path = ../../../src/shadows.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A326826F206FC75700492082 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A31B60D1207C612A0066029F /* libflatcc.a in Frameworks */,
+				A31B60D2207C612A0066029F /* libelasession.dylib in Frameworks */,
+				A31B60D3207C612A0066029F /* libflatccrt.a in Frameworks */,
+				A31B60D4207C612A0066029F /* libconfuse.a in Frameworks */,
+				A31B60D5207C612A0066029F /* libelacarrier.dylib in Frameworks */,
+				A31B60D6207C612A0066029F /* libelacommon.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A31B60CA207C612A0066029F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A31B60CE207C612A0066029F /* libconfuse.a */,
+				A31B60CF207C612A0066029F /* libelacarrier.dylib */,
+				A31B60D0207C612A0066029F /* libelacommon.dylib */,
+				A31B60CC207C612A0066029F /* libelasession.dylib */,
+				A31B60CB207C612A0066029F /* libflatcc.a */,
+				A31B60CD207C612A0066029F /* libflatccrt.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A3268269206FC75700492082 = {
+			isa = PBXGroup;
+			children = (
+				A326827D206FC77100492082 /* headers */,
+				A326827C206FC76A00492082 /* src */,
+				A3268273206FC75700492082 /* Products */,
+				A31B60CA207C612A0066029F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A3268273206FC75700492082 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3268272206FC75700492082 /* tunnel */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A326827C206FC76A00492082 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				A326828A206FC7C300492082 /* bind.c */,
+				A326828F206FC7C300492082 /* close.c */,
+				A3268290206FC7C300492082 /* info.c */,
+				A326828E206FC7C300492082 /* open.c */,
+				A326828B206FC7C300492082 /* ps.c */,
+				A326828D206FC7C300492082 /* services.c */,
+				A326828C206FC7C300492082 /* unbind.c */,
+				A3268282206FC7A200492082 /* cmd.c */,
+				A326827E206FC7A100492082 /* config.c */,
+				A3268283206FC7A200492082 /* main.c */,
+				A3268281206FC7A100492082 /* packet.c */,
+				A326827F206FC7A100492082 /* socket.c */,
+				A3268280206FC7A100492082 /* tunnel.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		A326827D206FC77100492082 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				A31B60C9207B68490066029F /* cmd_generated.h */,
+				A326829F2073391300492082 /* shadows.h */,
+				A326829E207305A500492082 /* agents.h */,
+				A326829B206FC7D400492082 /* cmd.h */,
+				A326829D206FC7D400492082 /* config.h */,
+				A326829C206FC7D400492082 /* packet.h */,
+				A326829A206FC7D300492082 /* socket.h */,
+				A3268298206FC7D300492082 /* status.h */,
+				A3268299206FC7D300492082 /* tunnel.h */,
+			);
+			path = headers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A3268271206FC75700492082 /* tunnel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3268279206FC75700492082 /* Build configuration list for PBXNativeTarget "tunnel" */;
+			buildPhases = (
+				A326826E206FC75700492082 /* Sources */,
+				A326826F206FC75700492082 /* Frameworks */,
+				A3268270206FC75700492082 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tunnel;
+			productName = tunnel;
+			productReference = A3268272206FC75700492082 /* tunnel */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A326826A206FC75700492082 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = iwhisper.io;
+				TargetAttributes = {
+					A3268271206FC75700492082 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = A326826D206FC75700492082 /* Build configuration list for PBXProject "tunnel" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A3268269206FC75700492082;
+			productRefGroup = A3268273206FC75700492082 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3268271206FC75700492082 /* tunnel */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A326826E206FC75700492082 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3268297206FC7C300492082 /* info.c in Sources */,
+				A3268293206FC7C300492082 /* unbind.c in Sources */,
+				A3268292206FC7C300492082 /* ps.c in Sources */,
+				A3268285206FC7A200492082 /* socket.c in Sources */,
+				A3268294206FC7C300492082 /* services.c in Sources */,
+				A3268291206FC7C300492082 /* bind.c in Sources */,
+				A3268288206FC7A200492082 /* cmd.c in Sources */,
+				A3268296206FC7C300492082 /* close.c in Sources */,
+				A3268289206FC7A200492082 /* main.c in Sources */,
+				A3268287206FC7A200492082 /* packet.c in Sources */,
+				A3268295206FC7C300492082 /* open.c in Sources */,
+				A3268286206FC7A200492082 /* tunnel.c in Sources */,
+				A3268284206FC7A200492082 /* config.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A3268277206FC75700492082 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /Users/stiartsly/Projects/elastos/elatun/external/include;
+				LIBRARY_SEARCH_PATHS = /Users/stiartsly/Projects/elastos/elatun/external/libs;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A3268278206FC75700492082 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /Users/stiartsly/Projects/elastos/elatun/external/include;
+				LIBRARY_SEARCH_PATHS = /Users/stiartsly/Projects/elastos/elatun/external/libs;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A326827A206FC75700492082 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A326827B206FC75700492082 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A326826D206FC75700492082 /* Build configuration list for PBXProject "tunnel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3268277206FC75700492082 /* Debug */,
+				A3268278206FC75700492082 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3268279206FC75700492082 /* Build configuration list for PBXNativeTarget "tunnel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A326827A206FC75700492082 /* Debug */,
+				A326827B206FC75700492082 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A326826A206FC75700492082 /* Project object */;
+}
