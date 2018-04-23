@@ -10,9 +10,7 @@
 #include "socket.h"
 #include "status.h"
 #include "packet.h"
-
-extern const char *prog_name;
-extern void wait_for_debug(void);
+#include "cmd.h"
 
 static int list_services(SOCKET fd,
                          const char *userid, const char *service)
@@ -31,7 +29,7 @@ static int list_services(SOCKET fd,
         packet_set_userid(packet, userid);
     } END_ENCODE();
 
-    socket_address("udp://127.0.0.1:33568", (struct sockaddr *)&addr, &addrlen);
+    socket_address(control_uri, (struct sockaddr *)&addr, &addrlen);
     rc = sendto(fd, data, data_len, 0, (const struct sockaddr *)&addr, addrlen);
     free(data);
     if (rc != (ssize_t)data_len) {
@@ -168,7 +166,6 @@ int services_cmd(int argc, char **argv)
         { "all",            no_argument,        NULL,   'a' },
         { "userid",         required_argument,  NULL,   'u' },
         { "service",        required_argument,  NULL,   's' },
-        { "debug",          no_argument,        NULL,    1  },
         { "help",           no_argument,        NULL,   'h' },
         { NULL,             0,                  NULL,    0  }
     };
@@ -191,10 +188,6 @@ int services_cmd(int argc, char **argv)
                 strncpy(service, optarg, sizeof(service) - 1);
             else
                 strcpy(service, optarg);
-            break;
-
-        case 1:
-            wait_for_debug();
             break;
 
         case 'h':

@@ -4,6 +4,8 @@
 #include <assert.h>
 #include <unistd.h>
 #include <errno.h>
+#include <getopt.h>
+#include <signal.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 
@@ -21,6 +23,7 @@
 #include "agents.h"
 #include "shadows.h"
 
+extern const char *prog_name;
 static const char *tunnel_version = "secure-tunnel/0.1/c";
 
 typedef enum {
@@ -512,7 +515,7 @@ static void stream_state_changed_cb(ElaSession *ws, int stream,
 
     if (client) {
         if (state == ElaStreamState_initialized) {
-            rc = ela_session_request(ws, session_request_complete, NULL);
+            rc = ela_session_request(ws, session_request_complete, tunnel);
             if (rc < 0) {
                 vlogE("Session request to %s error (0x%08X)", agent->userid,
                       ela_get_error());
@@ -605,7 +608,7 @@ static int agent_prepare(ElaCarrier *w, Agent *agent, void *context)
 
     agent->session = ws;
     agent->stream_id = ela_session_add_stream(ws, ElaStreamType_application,
-                ELA_STREAM_RELIABLE | ELA_STREAM_MULTIPLEXING | ELA_STREAM_MULTIPLEXING,
+                ELA_STREAM_RELIABLE | ELA_STREAM_MULTIPLEXING | ELA_STREAM_PORT_FORWARDING,
                 &callbacks, context);
     if (agent->stream_id < 0) {
         vlogE("Add stream to session error (0x%08X)", ela_get_error());
@@ -1157,7 +1160,7 @@ rebind_service:
     agent->session = ws;
     agent->stream_id = ela_session_add_stream(ws, ElaStreamType_application,
                 ELA_STREAM_RELIABLE | ELA_STREAM_MULTIPLEXING | ELA_STREAM_PORT_FORWARDING,
-                &callbacks, agent);
+                &callbacks, tunnel);
     if (agent->stream_id < 0) {
         vlogE("Add stream to sesion with %s error (0x%08X)", from,
               ela_get_error());
@@ -1178,7 +1181,7 @@ rebind_service:
     deref(agent);
 }
 
-void tunnel_kill(void)
+static void tunnel_kill(void)
 {
     if (secure_tunnel)
         deref(secure_tunnel);
@@ -1210,23 +1213,122 @@ static void tunnel_destroy(void *p)
         deref(tunnel->cfg);
 }
 
-int tunnel_main(const char *config_path, int need_daemonize,
-                void (*daemonize)(const char *, int))
+static void daemonize(const char *pid_file_path)
+{
+    FILE *fp;
+    pid_t pid;
+
+    // Check if the PID file exists
+    if ((fp = fopen(pid_file_path, "r"))) {
+        vlogW("Another instance of tunnel daemon is already running,"
+              "PID file %s exists. Exiting.\n", pid_file_path);
+        fclose(fp);
+        exit(1);
+    }
+
+    // Open the PID file for writing
+    fp = fopen(pid_file_path, "w+");
+    if (!fp) {
+        vlogE("Couldn't open the PID file for writing: %s. Exiting.\n",
+              pid_file_path);
+        exit(1);
+    }
+
+    pid = fork();
+
+    if (pid > 0) {
+        fprintf(fp, "%d", pid);
+        fclose(fp);
+        vlogD("Forking succeeded: PID: %d.\n", pid);
+        exit(0);
+    } else {
+        fclose(fp);
+    }
+
+    if (pid < 0) {
+        vlogE("Forking failed. Exiting");
+        exit(1);
+    }
+
+    if (setsid() < 0) {
+        vlogE("SID creation failed. Exiting.\n");
+        exit(1);
+    }
+}
+
+static void signal_handler(int signum)
+{
+    tunnel_kill();
+}
+
+static void show_usage()
+{
+    fprintf(stdout,
+            "Usage: %s [OPTIONS] [COMMAND] \n"
+            "A secure tunnel program to forward services over carrier network\n"
+            "Options:\n"
+            "  -c, --config=string       Location of config file.\n"
+            "                            Default: ./tunnel.conf\n"
+            "                                     ~/.elatun/tunnel.conf\n"
+            "                                     /etc/elatun/tunnel.conf\n"
+            "                                     /usr/local/etc/elatun/tunnel.conf\n"
+            "  -d, --daemon[=foreground] Run as tunnel daemon. If foreground is specified,\n"
+            "                            it will running in foreground, default is running\n"
+            "                            as a background daemon.\n"
+            "  -h, --help                Print this help usage and quit\n"
+            "  -v, --version             Print version information and quit\n"
+            "\n",
+            prog_name);
+}
+
+int tunnel_main(int argc, char *argv[])
 {
     Tunnel *tunnel;
     Config *config;
+    char *config_file;
     ElaOptions opts;
     ElaCallbacks cbs;
     ListIterator it;
+    int run_as_deamon = 0;
     int cur = 0;
     int rc;
+    int opt;
+    int idx;
 
-    config = load_config(config_path);
+    signal(SIGINT, signal_handler);
+    signal(SIGHUP, signal_handler);
+    signal(SIGTERM, signal_handler);
+
+    struct option options[] = {
+        { "config",         required_argument,  NULL, 'c' },
+        { "daemon",         no_argument,        NULL, 'D' },
+        { NULL,             0,                  NULL,  0  }
+    };
+
+    while ((opt = getopt_long(argc, argv, "c:D", options, &idx)) != -1) {
+        switch (opt) {
+        case 'c':
+            config_file = optarg;
+            break;
+
+        case 'D':
+            run_as_deamon = 1;
+            break;
+
+        case '?':
+        default:
+            show_usage();
+            exit(0);
+            break;
+        }
+    }
+
+    config = load_config(config_file);
     if (!config)
         return -1;
 
-    if (!need_daemonize)
-        daemonize(config->pidfile, need_daemonize);
+    if (run_as_deamon)
+        daemonize(config->pidfile);
 
     // Initialize carrier options.
     memset(&opts, 0, sizeof(opts));
@@ -1277,8 +1379,8 @@ int tunnel_main(const char *config_path, int need_daemonize,
         return -1;
     }
 
-    tunnel->cfg = config;
-    tunnel->socket = socket_create(config->ctrl_addr);
+    tunnel->cfg = config; // config's ref pass to tunnel object!!!
+    tunnel->socket = socket_create(config->ctrl_uri);
     if (tunnel->socket < 0) {
         deref(tunnel);
         return -1;
@@ -1308,7 +1410,7 @@ int tunnel_main(const char *config_path, int need_daemonize,
         return -1;
     }
 
-    rc = ela_session_init(tunnel->w, session_request_callback, NULL);
+    rc = ela_session_init(tunnel->w, session_request_callback, tunnel);
     if (rc < 0) {
         vlogE("Can not initialize tunnel session (0x%08X)",
               ela_get_error());

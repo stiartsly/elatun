@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <limits.h>
 #include <assert.h>
 
@@ -9,8 +11,38 @@
 #include <ela_carrier.h>
 
 #include "config.h"
+#include "tunnel.h"
 
-static const char *def_ctrl_addr = "udp://localhost:33568";
+extern const char *prog_name;
+
+static const char *def_ctrl_uri = "udp://localhost:33568";
+
+static const char *config_files[] = {
+    "./tunnel.conf",
+    "~/.elatun/tunnel.conf"
+    "/etc/elatun/tunnel.conf",
+    "/usr/local/etc/elatun/tunnel.conf",
+    NULL
+};
+
+static const char *get_config_file(const char *config)
+{
+    const char **cond;
+
+    if (config && *config)
+        return config;
+
+    for (cond = config_files; *cond; cond++) {
+        int fd = open(*cond, O_RDONLY);
+        if (fd < 0)
+            continue;
+
+        close(fd);
+        return *cond;
+    }
+
+    return NULL;
+}
 
 static void config_error(cfg_t *cfg, const char *fmt, va_list ap)
 {
@@ -60,13 +92,14 @@ static void config_destroy(void *p)
     if (config->pidfile)
         free(config->pidfile);
 
-    if (config->ctrl_addr)
-        free(config->ctrl_addr);
+    if (config->ctrl_uri)
+        free(config->ctrl_uri);
 }
 
 Config *load_config(const char *config_file)
 {
     Config *config;
+    const char *path;
     cfg_t *cfg, *sec;
     cfg_t *bootstraps;
     const char *stropt;
@@ -94,15 +127,22 @@ Config *load_config(const char *config_file)
         CFG_STR("logfile", NULL, CFGF_NONE),
         CFG_STR("datadir", NULL, CFGF_NONE),
         CFG_STR("pidfile", NULL, CFGF_NONE),
-        CFG_STR("ctrlpath", NULL, CFGF_NONE),
+        CFG_STR("control_uri", NULL, CFGF_NONE),
         CFG_END()
     };
+
+    path = get_config_file(config_file);
+    if (path == NULL) {
+        fprintf(stderr, "Missing config file!\n");
+        return NULL;       
+    }
+
 
     cfg = cfg_init(cfg_opts, CFGF_NONE);
     cfg_set_error_function(cfg, config_error);
     cfg_set_validate_func(cfg, NULL, not_null_validator);
 
-    rc = cfg_parse(cfg, config_file);
+    rc = cfg_parse(cfg, path);
     if (rc != CFG_SUCCESS) {
         cfg_error(cfg, "can not parse config file: %s.", config_file);
         cfg_free(cfg);
@@ -181,16 +221,14 @@ Config *load_config(const char *config_file)
     stropt = cfg_getstr(cfg, "logfile");
     if (stropt)
         config->logfile = strdup(stropt);
-    else {
-        sprintf(buffer, "%s/%s/%s.log", getenv("HOME"), prog_dir, prog_name);
-        config->logfile = strdup(buffer);
-    }
+    else
+        config->logfile = NULL;
 
     stropt = cfg_getstr(cfg, "datadir");
     if (stropt)
         config->datadir = strdup(stropt);
     else {
-        sprintf(buffer, "%s/%s/data", getenv("HOME"), prog_dir);
+        sprintf(buffer, "%s/.%s/data", getenv("HOME"), prog_name);
         config->datadir = strdup(buffer);
     }
 
@@ -198,10 +236,15 @@ Config *load_config(const char *config_file)
     if (stropt) {
         config->pidfile = strdup(stropt);
     } else {
-        sprintf(buffer, "%s/%s/%s.pid", getenv("HOME"), prog_dir, prog_name);
+        sprintf(buffer, "%s/.%s/%s.pid", getenv("HOME"), prog_name, prog_name);
         config->pidfile = strdup(buffer);
     }
 
-    config->ctrl_addr = strdup(def_ctrl_addr);
+    stropt = cfg_getstr(cfg, "control_uri");
+    if (stropt)
+        config->ctrl_uri = strdup(stropt);
+    else
+        config->ctrl_uri = strdup(def_ctrl_uri);
+
     return config;
 }

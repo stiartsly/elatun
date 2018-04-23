@@ -3,8 +3,7 @@
 #include <stdbool.h>
 #include <getopt.h>
 
-extern const char *prog_name;
-extern void wait_for_debug(void);
+#include "cmd.h"
 
 static int display_info(bool show_user_address, bool show_userid,
                         bool show_user_info, bool show_friends)
@@ -54,7 +53,6 @@ int info_cmd(int argc, char **argv)
         { "userid",         no_argument,        NULL,   'u' },
         { "info",           no_argument,        NULL,   'I' },
         { "friends",        no_argument,        NULL,   'f' },
-        { "debug",          no_argument,        NULL,    1  },
         { "help",           no_argument,        NULL,   'h' },
         { NULL,             0,                  NULL,    0  }
     };
@@ -82,10 +80,6 @@ int info_cmd(int argc, char **argv)
 
         case 'f':
             show_friends = 1;
-            break;
-
-        case 1:
-            wait_for_debug();
             break;
             
         case 'h':

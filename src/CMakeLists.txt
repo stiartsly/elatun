@@ -10,10 +10,10 @@ include_directories (
 )
 
 link_directories(
-    "${PROJECT_SOURCE_DIR}/external/libs"
+    "${PROJECT_SOURCE_DIR}/external/lib"
 )
 
-add_executable(tunnel
+add_executable(elatun
     cmd_generated.h
     cmd/bind.c
     cmd/unbind.c
@@ -30,15 +30,14 @@ add_executable(tunnel
     main.c
 )
 
-target_link_libraries(tunnel
+target_link_libraries(elatun
     elacommon
     elacarrier
     elasession
-    flatcc
     flatccrt
     confuse
 )
 
 if (SECURE_TUNNEL_INSTALL)
-    install(TARGETS tunnel DESTINATION bin)
+    install(TARGETS elatun DESTINATION bin)
 endif()

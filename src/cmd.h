@@ -5,7 +5,10 @@
 extern "C" {
 #endif
 
-int run_cmd(int argc, char **argv);
+extern const char *prog_name;
+extern const char *control_uri;
+
+int cmd_main(int argc, char **argv);
 
 #ifdef __cplusplus
 }

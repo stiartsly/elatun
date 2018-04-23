@@ -5,11 +5,7 @@
 extern "C" {
 #endif
 
-int tunnel_main(const char *config_path,
-                int need_daemonize,
-                void (*daemonize)(const char *, int));
-
-void tunnel_kill(void);
+int tunnel_main(int argc, char *argv[]);
 
 #ifdef __cplusplus
 }

@@ -12,6 +12,6 @@ xcuserdata
 DerivedData
 tags
 /build
-/external/libs
+/external/lib
 /src/cmd_generated.h
 /external/include/flatcc

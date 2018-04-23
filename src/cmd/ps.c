@@ -6,9 +6,7 @@
 
 #include "packet.h"
 #include "status.h"
-
-extern const char *prog_name;
-extern void wait_for_debug(void);
+#include "cmd.h"
 
 static int ps_service_forwardings(const char *service, const char *userid,
                                   bool ps_all)
@@ -111,7 +109,6 @@ int ps_cmd(int argc, char **argv)
     struct option options[] = {
         { "all",            no_argument,        NULL, 'a' },
         { "quiet",          no_argument,        NULL, 'q' },
-        { "debug",          no_argument,        NULL,  1  },
         { "help",           no_argument,        NULL, 'h' },
         { NULL,             0,                  NULL,  0  }
     };
@@ -134,10 +131,6 @@ int ps_cmd(int argc, char **argv)
                 strncpy(service, optarg, sizeof(service) - 1);
             else
                 strcpy(service, optarg);
-            break;
-
-        case 1:
-            wait_for_debug();
             break;
         
         case 'h':

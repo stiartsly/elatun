@@ -22,13 +22,10 @@ typedef struct {
     char *datadir;
     char *pidfile;
 
-    char *ctrl_addr;
+    char *ctrl_uri;
 
     List *bootstraps;
 } Config;
-
-extern const char *prog_dir;
-extern const char *prog_name;
 
 Config *load_config(const char *config_file);
 
